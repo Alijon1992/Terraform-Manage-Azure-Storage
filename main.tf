@@ -16,7 +16,14 @@ module "vnet1" {
 }
 
 
-
+# Create subnet
+module "snet" {
+  source = "../Module/Subnet"
+  address_prefixes = var.snet_address_prefixes
+  name = var.snet_name
+  resource_group_name = module.rg1.name
+  virtual_network_name = module.vnet1.name
+}
 
 
 

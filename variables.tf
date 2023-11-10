@@ -19,6 +19,16 @@ variable "vnet1_dns_servers" {
   type = list(string)
 }
 
+# Subnet
+variable "snet_address_prefixes" {
+  type = list(string)
+}
+
+variable "snet_name" {
+  type = string
+}
+
+
 
 
 
