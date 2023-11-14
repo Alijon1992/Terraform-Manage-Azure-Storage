@@ -42,3 +42,26 @@ module "nic" {
   location            = module.rg1.location
 }
 
+# Create a Windows VM and connect it to our Network Interface Card
+module "vm" {
+  source                = "../Module/Virtual_Machine"
+  name                  = var.vm_name
+  resource_group_name   = module.rg1.name
+  location              = module.rg1.location
+  size                  = var.vm_size
+  admin_username        = var.vm_username
+  admin_password        = var.vm_password
+  network_interface_ids = module.nic.nsg_id
+
+  # OS Disk
+  caching              = var.vm_caching
+  storage_account_type = var.vm_stg_acc_type
+
+  # Source image reference
+  publisher = var.vm_publisher
+  offer     = var.vm_offer
+  sku       = var.vm_sku
+  vm_version=var.vm_version
+ 
+}
+

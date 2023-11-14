@@ -47,6 +47,48 @@ variable "nic_name" {
   type = string
 }
 
+# Virtual Machine
+variable "vm_name" {
+  type = string
+}
+
+variable "vm_size" {
+  type = string
+}
+
+variable "vm_username" {
+  type = string
+}
+
+variable "vm_password" {
+  type = string
+}
+
+# OS Disk
+variable "vm_caching" {
+  type = string
+}
+
+variable "vm_stg_acc_type" {
+  type = string
+}
+
+# Source image reference
+variable "vm_publisher" {
+  type = string
+}
+
+variable "vm_offer" {
+  type = string
+}
+
+variable "vm_sku" {
+  type = string
+}
+
+variable "vm_version" {
+  type = string
+}
 
 
 
