@@ -236,3 +236,11 @@ variable "file_share_start" {
 variable "file_share_expiry" {
   type = string
 }
+
+# File Upload to Share
+variable "file_upload_name" {
+  type = string
+}
+variable "file_upload_source" {
+  type = string
+}

@@ -153,3 +153,11 @@ module "file_share" {
   file_share_start       = var.file_share_start
   file_share_expiry      = var.file_share_expiry
 }
+
+# File Upload to Share
+module "file_share_upload" {
+  source = "../Module/File_Share_Upload"
+  name = var.file_upload_name
+  storage_share_id = module.file_share.file_share_id
+  file_source =  var.file_upload_source
+}
