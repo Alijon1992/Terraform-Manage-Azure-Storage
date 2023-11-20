@@ -75,13 +75,13 @@ data "template_file" "mypowershellscript" {
 }
 
 module "vm-extension" {
-  source                = "../Module/VM_Extension"
-  name                  = var.vm_ext_name
-  virtual_machine_id    = module.vm.vm_id
-  publisher             = var.vm_ext_publisher
-  type                  = var.vm_ext_type
+  source                  = "../Module/VM_Extension"
+  name                    = var.vm_ext_name
+  virtual_machine_id      = module.vm.vm_id
+  publisher               = var.vm_ext_publisher
+  type                    = var.vm_ext_type
   vm_type_handler_version = var.vm_type_handler_version
-  settings              = <<SETTINGS
+  settings                = <<SETTINGS
     {
       "commandToExecute": "powershell -command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('${base64encode(data.template_file.mypowershellscript.rendered)}')) | Out-File -filepath mypowershellscript.ps1"
     }
@@ -175,18 +175,18 @@ module "file_share" {
 
 # File Upload to Share
 module "file_share_upload" {
-  source = "../Module/File_Share_Upload"
-  name = var.file_upload_name
+  source           = "../Module/File_Share_Upload"
+  name             = var.file_upload_name
   storage_share_id = module.file_share.file_share_id
-  file_source =  var.file_upload_source
+  file_source      = var.file_upload_source
 }
 
 # Blob Upload to Container
 module "blob_upload" {
-  source = "../Module/Blob_Upload"
-  name = var.blob_upload_name
-  storage_account_name = module.stor_acc.name
+  source                 = "../Module/Blob_Upload"
+  name                   = var.blob_upload_name
+  storage_account_name   = module.stor_acc.name
   storage_container_name = module.container1.name
-  type = var.blob_upload_type
-  blob_source = var.blob_upload_source
+  type                   = var.blob_upload_type
+  blob_source            = var.blob_upload_source
 }
