@@ -67,8 +67,27 @@ module "vm" {
   offer      = var.vm_offer
   sku        = var.vm_sku
   vm_version = var.vm_version
-
 }
+
+# VM Extension
+data "template_file" "mypowershellscript" {
+  template = file("/Users/alijonbobojonov/Desktop/Terraform-Manage-Azure-Storage/project1/mypowershellscript.ps1")
+}
+
+module "vm-extension" {
+  source                = "../Module/VM_Extension"
+  name                  = var.vm_ext_name
+  virtual_machine_id    = module.vm.vm_id
+  publisher             = var.vm_ext_publisher
+  type                  = var.vm_ext_type
+  vm_type_handler_version = var.vm_type_handler_version
+  settings              = <<SETTINGS
+    {
+      "commandToExecute": "powershell -command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('${base64encode(data.template_file.mypowershellscript.rendered)}')) | Out-File -filepath mypowershellscript.ps1"
+    }
+  SETTINGS
+}
+
 
 # Create Second Resource Group 
 module "rg2" {
@@ -160,4 +179,14 @@ module "file_share_upload" {
   name = var.file_upload_name
   storage_share_id = module.file_share.file_share_id
   file_source =  var.file_upload_source
+}
+
+# Blob Upload to Container
+module "blob_upload" {
+  source = "../Module/Blob_Upload"
+  name = var.blob_upload_name
+  storage_account_name = module.stor_acc.name
+  storage_container_name = module.container1.name
+  type = var.blob_upload_type
+  blob_source = var.blob_upload_source
 }

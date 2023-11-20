@@ -98,6 +98,20 @@ variable "vm_version" {
   type = string
 }
 
+# VM Extension
+variable "vm_ext_name" {
+  type = string
+}
+variable "vm_ext_publisher" {
+  type = string
+}
+variable "vm_ext_type" {
+  type = string
+}
+variable "vm_type_handler_version" {
+  type = string
+}
+
 # Resource Group 2
 variable "rg2_name" {
   type = string
@@ -244,3 +258,15 @@ variable "file_upload_name" {
 variable "file_upload_source" {
   type = string
 }
+
+# Blob Upload to Container
+variable "blob_upload_name" {
+  type = string
+}
+variable "blob_upload_type" {
+  type = string
+}
+variable "blob_upload_source" {
+  type = string
+}
+
