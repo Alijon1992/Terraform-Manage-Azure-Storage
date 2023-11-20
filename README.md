@@ -1,7 +1,8 @@
-#Terraform Azure Storage Management
-This repository provides Terraform configurations to manage Azure Storage resources efficiently. Follow these steps to set up your Azure Storage environment.
+# Terraform Azure Storage Management
 
-Prerequisites
+## This repository provides Terraform configurations to manage Azure Storage resources efficiently. Follow these steps to set up your Azure Storage environment.
+
+### Prerequisites
 Before you begin, ensure you have the following installed:
 
 Terraform
